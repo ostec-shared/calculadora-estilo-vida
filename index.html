@@ -4,25 +4,96 @@
   <meta charset="UTF-8">
   <title>Calculadora de Estilo de Vida (OMS)</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 30px; }
-    label { display: block; margin-top: 10px; }
-    input { margin-left: 10px; }
-    button { margin-top: 15px; padding: 8px 12px; }
-    #resultado { margin-top: 20px; font-weight: bold; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      max-width: 450px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+      color: #34495e;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccd1d9;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    input:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 5px rgba(52,152,219,0.4);
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #3498db;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    #resultado {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
-  <h2>Calculadora de Estilo de Vida (base OMS)</h2>
+  <div class="card">
+    <h2>Calculadora de Estilo de Vida (OMS)</h2>
 
-  <label>Horas de sono por noite: <input type="number" id="sono" min="0" max="12"></label>
-  <label>Minutos de exercício/semana: <input type="number" id="exercicio" min="0"></label>
-  <label>Gramas de fruta/vegetais por dia: <input type="number" id="alimentacao" min="0"></label>
-  <label>Litros de água por dia: <input type="number" step="0.1" id="agua" min="0"></label>
-  <label>Nível de stress (0=alto, 10=baixo): <input type="number" id="stress" min="0" max="10"></label>
+    <label>Horas de sono por noite:</label>
+    <input type="number" id="sono" min="0" max="12">
 
-  <button onclick="calcular()">Calcular</button>
+    <label>Minutos de exercício/semana:</label>
+    <input type="number" id="exercicio" min="0">
 
-  <div id="resultado"></div>
+    <label>Gramas de fruta/vegetais por dia:</label>
+    <input type="number" id="alimentacao" min="0">
+
+    <label>Litros de água por dia:</label>
+    <input type="number" step="0.1" id="agua" min="0">
+
+    <label>Nível de stress (0=alto, 10=baixo):</label>
+    <input type="number" id="stress" min="0" max="10">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultado"></div>
+  </div>
 
   <script>
     function calcular() {
@@ -32,15 +103,17 @@
       const agua = Math.min((document.getElementById("agua").value / 2) * 10, 10);
       const stress = parseFloat(document.getElementById("stress").value) || 0;
 
-      // pesos inspirados na OMS
       const score = (sono * 0.2 + exercicio * 0.3 + alimentacao * 0.3 + agua * 0.1 + stress * 0.1).toFixed(1);
 
       let categoria = "";
-      if (score < 4) categoria = "⚠️ Risco elevado";
-      else if (score < 6) categoria = "🔶 Precisa de melhorias";
-      else if (score < 8) categoria = "✅ Saudável com margem";
-      else categoria = "🌿 Alinhado com recomendações OMS";
+      let cor = "";
+      if (score < 4) { categoria = "⚠️ Risco elevado"; cor = "#e74c3c"; }
+      else if (score < 6) { categoria = "🔶 Precisa de melhorias"; cor = "#f39c12"; }
+      else if (score < 8) { categoria = "✅ Saudável com margem"; cor = "#27ae60"; }
+      else { categoria = "🌿 Alinhado com recomendações OMS"; cor = "#2ecc71"; }
 
+      document.getElementById("resultado").style.background = cor + "20"; // cor suave
+      document.getElementById("resultado").style.color = cor;
       document.getElementById("resultado").innerHTML =
         `Pontuação: ${score}/10 <br> Classificação: ${categoria}`;
     }
