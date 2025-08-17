@@ -104,14 +104,16 @@
     <button onclick="calcular()">Calcular</button>
 
     <div id="resultado"></div>
+
+    <p style="font-size: 12px; color: #7f8c8d; text-align: center;"> Referências: 
+      <a href="https://www.who.int/health-topics/sleep" target="_blank">Sono</a> | 
+      <a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank">Exercício</a> | 
+      <a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank">Alimentação</a> | 
+      <a href="https://www.who.int/news-room/questions-and-answers/item/stress" target="_blank">Stress</a>
+    </p>
   </div>
 
-  <p style="font-size: 12px; color: #7f8c8d; text-align: center;">
-  Referências: <a href="https://www.who.int/health-topics/sleep" target="_blank">Sono</a> | 
-  <a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank">Exercício</a> | 
-  <a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank">Alimentação</a> | 
-  <a href="https://www.who.int/news-room/questions-and-answers/item/stress" target="_blank">Stress</a>
-</p>
+
   <script>
     function calcular() {
       const sonoVal = parseFloat(document.getElementById("sono").value) || 0;
